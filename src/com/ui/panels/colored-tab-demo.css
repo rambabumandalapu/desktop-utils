@@ -1,0 +1,76 @@
+
+.tab{
+
+    -fx-background-color:   -fx-background;
+
+    -fx-background: green;
+
+}
+
+ 
+
+.tab:hover{
+
+    -fx-background:   tomato
+
+}
+
+ 
+
+.tab:selected{
+
+    -fx-background:   yellow;
+
+}
+
+.tab-label {
+
+    -fx-font-weight: normal;
+
+    -fx-text-fill: white;
+
+}
+
+.button{
+
+    -fx-background-color:
+
+        linear-gradient(from 0% 93% to 0% 100%, #a34313 0%, #903b12 100%),
+
+        #9d4024,
+
+        #d86e3a,
+
+        radial-gradient(center 50% 50%, radius 100%, #ea7f4b, #c54e2c);
+
+ 
+
+}
+
+.button:selected{
+
+    -fx-background:   yellow
+
+}
+
+tab-label {
+
+    -fx-alignment: CENTER;
+
+    -fx-text-fill: white;
+
+    -fx-font-size: 12px;
+
+    -fx-font-weight: bold;
+
+}
+
+ 
+
+.tab:selected .tab-label {
+
+    -fx-alignment: CENTER;
+
+    -fx-text-fill: #96b946;
+
+}
