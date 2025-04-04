@@ -1,0 +1,111 @@
+https://www.baeldung.com/spring-boot-add-filter
+https://www.baeldung.com/spring-security-registered-filters
+https://www.baeldung.com/spring-security-ldap
+https://github.com/eugenp/tutorials/blob/master/spring-security-modules/spring-security-ldap/src/main/java/com/baeldung/config/SecurityConfig.java
+
+DISABLE JWT TOKEN
+==
+https://stackoverflow.com/questions/59500590/how-to-disable-a-jwt-token
+=
+I want to disable the generated JWT token when the user logs out from the application and this needs to be done in back-end code. How can I disable the JSON Web Token (JWT) using the authentication server (SpringBoot)
+
+
+Generally speaking, with JWTs you have an access token with a short duration (like 15 minutes) and a longer refresh token (30 days). You should store the refresh tokens that you've given out in a table and when the user logs out, flag the token as revoked and then when you give a new access token out, verify that the refresh token hasn't been revoked
+
+https://stackoverflow.com/questions/59213051/how-to-force-expire-a-jwt-token-in-asp-net-core/59213287#
+Problem -
+I have implemented a JWT authentication and a policy-based authorization in ASP.NET Core. There is a certain user with admin privileges who can assign permissions to non-admin users. If the admin updates the permissions/claims of a non-admin user, is there a way to force expire the access token so that user carrying it will be forced to request a new access token with the newly updated permissions/claims? Right now, the only way to that is to wait for the token to expire but I want to force expire it immediately.
+
+
+If a user logged in web,
+get wctoken or wctrusted token kept in a note.
+try to use that in postman.
+
+https://fusionauth.io/articles/tokens/revoking-jwts
+https://fusionauth.io/articles/oauth/why-no-authentication-in-oauth  - very important
+open api - https://youtu.be/2pyUYJ4NiMI
+OIDC
+==
+https://www.geeksforgeeks.org/spring-boot-oauth2-with-jwt/
+open api and its alternatives.
+
+Some alternatives to OpenAPI are: 
+StackShare
++2
+JsonAPI: A specification for building APIs in JSON.
+Postman: A tool for designing, testing, and documenting APIs.
+GraphQL: A query language for APIs and a runtime for fulfilling those queries.
+OData: An open protocol to allow the creation and consumption of queryable and interoperable RESTful APIs.
+RAML: A language for describing RESTful APIs.
+oapi-codegen: A Go tool for generating Go client and server code from OpenAPI 3 specifications.
+NSwag: A toolchain for .NET, .NET Core and TypeScript to generate code from OpenAPI specifications.
+
+
+==
+Authentication based on JWT tokens is stateless in serverside. So when a token is not expired it will work. There are some approaches to the problem:
+
+Not including the roles and permissions in the token claims and getting these values from the database in each request.
+Using refresh token mechanism and set a refreshing time to a few minutes and return a new token when refreshing time is expired. Therefore for the tokens with the expired refreshing time you know to get the new access permissions(not in each request). New permissions will set in few minutes but the authenticated user doesn't need to log in again.
+Creating a set of black-list tokens and append the last issued token to that (not recommended).
+
+Thanks for your answer. I appreciate it. I already have implemented the concept of refresh tokens too but it's only requested when the access token has expired. I need to immediately expire the access token once the user's permissions have changed. I guess the first option you suggested will be my best bet for now. Thanks again! – 
+
+
+
+
+==
+Certainly! Below is an example of a application.properties file for a Spring Boot application that includes JWT and OAuth2 configuration information. This setup assumes you are using Spring Security for OAuth2 and JWT authentication.
+
+# Server Configuration
+server.port=8080
+
+# JWT Configuration
+jwt.secret=yourSecretKey
+jwt.expiration=3600000  # 1 hour in milliseconds
+
+# OAuth2 Configuration
+spring.security.oauth2.client.registration.google.client-id=yourGoogleClientId
+spring.security.oauth2.client.registration.google.client-secret=yourGoogleClientSecret
+spring.security.oauth2.client.registration.google.redirect-uri={baseUrl}/login/oauth2/code/google
+spring.security.oauth2.client.registration.google.scope=profile,email
+spring.security.oauth2.client.registration.google.authorization-grant-type=authorization_code
+spring.security.oauth2.client.registration.google.client-name=Google
+
+spring.security.oauth2.client.provider.google.authorization-uri=https://accounts.google.com/o/oauth2/auth
+spring.security.oauth2.client.provider.google.token-uri=https://oauth2.googleapis.com/token
+spring.security.oauth2.client.provider.google.user-info-uri=https://www.googleapis.com/oauth2/v3/userinfo
+spring.security.oauth2.client.provider.google.user-name-attribute=sub
+
+# Database Configuration (example)
+spring.datasource.url=jdbc:mysql://localhost:3306/yourDatabase
+spring.datasource.username=yourUsername
+spring.datasource.password=yourPassword
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+
+# Hibernate Configuration
+spring.jpa.hibernate.ddl-auto=update
+spring.jpa.show-sql=true
+spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5Dialect
+
+# Logging Configuration
+logging.level.org.springframework.security=DEBUG
+logging.level.com.yourcompany.yourapp=DEBUG
+
+Explanation:
+Server Configuration: Sets the server port to 8080.
+JWT Configuration: Defines the secret key and expiration time for JWT tokens.
+OAuth2 Configuration: Configures OAuth2 client details for Google, including client ID, client secret, redirect URI, scopes, and endpoints.
+Database Configuration: Example configuration for connecting to a MySQL database.
+Hibernate Configuration: Sets Hibernate properties for JPA.
+Logging Configuration: Enables debug logging for Spring Security and your application.
+
+Feel free to adjust the values according to your specific requirements.
+
+
+PERFORAMCE CRITICAL OPERATIONS - 
+https://medium.com/@AlexanderObregon/java-generics-type-safety-and-performance-a0864ca72a5a
+https://www.baeldung.com/xstream-serialize-object-to-xml
+https://www.baeldung.com/xstream-json-processing
+https://www.baeldung.com/courses/learn-spring-security-course
+https://www.baeldung.com/courses/learn-spring-security-course
+https://youtu.be/us0VjFiHogo
